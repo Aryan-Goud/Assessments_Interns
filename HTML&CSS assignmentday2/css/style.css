@@ -1,0 +1,106 @@
+
+.menu
+{
+    background-color: black;
+    margin: -10px;
+}
+.logo img
+{
+width: auto;
+height: 90px;
+}
+.headnav
+{
+    border-right:1px solid #bbb;
+}
+header nav ul li{
+    display: inline;
+}
+
+header nav ul{
+    margin: -50px 40px 0px 250px;
+    padding-top: 10px;
+}
+header nav ul li a{
+    display: inline;
+    list-style: none;
+    text-decoration: none;
+    color: aliceblue;
+    padding-right: 20px;
+}
+select {
+    background: transparent;
+    border: #444 solid;
+    border-radius: 1em;
+    color: inherit;
+    font: inherit;
+  }
+  .fixed option {
+    color: white;
+  }
+  select.solid {
+    background: #222;
+  }
+ .items li{
+    width: 80%;
+    list-style: none;
+    border: 1px solid black;
+    padding: 10px; 
+} 
+.col1
+{
+    width: 23.33%;
+    float: left;
+}
+.col2
+{
+    width: 23.33%;
+    float: right;
+}
+.col3
+{
+    margin-top: 10px;
+    width: 53.33%;
+    margin: 0px auto;
+}
+.details  {
+    list-style:none;
+    display: inline-block;
+    margin-right: 5px;
+    text-align: left;
+    text-decoration: none;
+
+}
+progress {
+    text-align: center;
+    height: 1.5em;
+    width: 100%;
+    border: none;
+    position:relative;
+    
+  }
+  progress:before {
+    content: attr(data-label);
+    font-size: 0.8em;
+    vertical-align: 0;
+    position:absolute;
+    left:0;
+    right:0;
+  }
+  progress::-webkit-progress-bar {
+    background-color: #bbb;
+    border-width: 5px;
+  }
+
+  progress::-moz-progress-bar {
+    background-color: #7cc4ff;
+  }
+  progress::-webkit-progress-value{
+    background-color: #7cc4ff;
+  } 
+  .term{
+    color: rgb(77, 77, 218);
+  }
+  .sla{
+    color: black;
+  }

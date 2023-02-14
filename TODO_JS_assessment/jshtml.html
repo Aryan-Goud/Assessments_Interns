@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Script Assessment</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="./css/stylejs.css">
+</head>
+<body>
+    
+    <header>
+        <div class="container">
+            <h2>List of todo tasks: <span id="todo">4</span> </h2>
+            <div class="tasks">
+                <h2 style="margin-left: -80px;">pending tasks: <span id="pendingtasks">2</span></h2>
+                <h2>Done: <span id="donetasks">2</span></h2>
+            </div>
+            <div style="padding-left: 20px; padding-right: 20px;" class="input-group">
+                <input type="text" id="inp" class="form-control" placeholder="Title...">
+                <span class="input-group-btn">
+                <button onclick="btnclicked()" class="btn btn-default" type="button" style="padding-left: 50px; padding-right: 50px; background-color:darkgrey;">add activity</button>
+                </span>
+            </div>
+        </div>
+    </header>
+    <div style=" background-color: aliceblue; margin-left: 55px; margin-right: 55px;" >
+    <ul style="padding: 0%;" id="task"></ul>
+</div>
+    <script src="javascr.js"></script>
+</body>
+</html>

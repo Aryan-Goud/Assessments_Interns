@@ -1,0 +1,39 @@
+.container{
+    background-color: rgb(82, 82, 243);
+    padding: 40px 30px;
+    text-align: center;
+}
+.tasks{
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    float: right;
+    margin-right: 70px;
+  }
+ 
+li:nth-child(odd) {
+    background: #f9f9f9;
+  }
+li {
+    font-size: 17px;
+    cursor:pointer;
+    position: relative;
+    padding: 10px 10px 10px 50px;
+    background: rgb(227, 225, 225);
+    list-style: none;
+    transition: 0.3s;
+  }
+li.checked {
+    text-decoration: line-through;
+    background: #807e7e;
+    color:white;
+  }
+li.checked::before {
+    content: '\2713';
+    display: inline-block;
+    color: rgb(250, 247, 247);
+    padding: 0 16px 0 11px;
+    margin-left: -40px;
+    font-size: large;
+  }
