@@ -1,0 +1,62 @@
+TABLES USED
+
+1)user
+
+user_id-->primary key
+username
+reputation-->not null
+votesup
+votesdown
+views
+createdate
+
+2)post
+
+post_id-->primary key
+user_id-->foreign key
+title
+body
+commentcount
+votescount
+createdate
+lastupdated
+
+3)votes
+
+vote_id-->primary key
+votetype_id-->1 if voteup else 0
+createdate
+amount
+user_id-->foreign key
+post_id-->foreign key
+
+4)comments
+
+comment_id-->primary key
+text
+createdate
+updateddate
+user_id-->foreign key
+post_id-->foreign key
+
+5)pending
+
+pend_id-->primary key
+pendtype-->not null
+reason
+duplicate
+post_id-->foreign key
+
+6)tags
+
+tags_id-->primary key
+tagname
+create_on
+
+7)tagcon
+
+taging_id-->primary key
+tags_id-->foreign key
+post_id-->foreign key
+
+
