@@ -1,0 +1,5 @@
+newuser\filter.class
+newuser\connectionjdbc.class
+newuser\registering.class
+newuser\registrations.class
+newuser\displaying.class
