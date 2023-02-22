@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Calculator</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+	<div class="calculator">
+		
+			<input class="res" type="text" id="element" readonly>
+		
+		<div class="buttons">
+            <div class="m" >
+			<button onclick="Screenclear()">C</button>
+			<button onclick="backspace()">←</button><br><br>
+        </div>
+            <button onclick="put(7)">7</button>
+			<button onclick="put(8)">8</button>
+			<button onclick="put(9)">9</button>
+			<button style="padding: 19px 20px;" onclick="put('*')">x</button><br>
+            <button onclick="put(4)">4</button>
+			<button onclick="put(5)">5</button>
+			<button onclick="put(6)">6</button>
+			<button style="padding: 18px 21px;" onclick="put('-')">-</button><br>
+            <button onclick="put(1)">1</button>
+			<button onclick="put(2)">2</button>
+			<button onclick="put(3)">3</button>
+			<button onclick="put('+')">+</button><br>
+			<button style="padding: 19px 22px;"  onclick="put('/')">/</button>
+            <button onclick="put(0)">0</button>
+			<button style="padding: 19px 22px;"  onclick="put('.')">.</button>
+			<button onclick="calculate()">=</button>
+		</div>
+	</div>
+	<script type="text/javascript" src="script.js"></script>
+</body>
+</html>

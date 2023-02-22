@@ -1,0 +1,37 @@
+.calculator {
+	border: 2px solid #ccc;
+	border-radius: 5px;
+	width: 250px;
+	margin: 50px auto;
+}
+
+
+.res{
+    background-color: #ccc;
+    padding: 10px 2px;
+    text-align: right;
+    font-size: 20px;
+    border-radius: 4px;
+}
+
+ .m{
+    display: flex;
+    flex-wrap: wrap;
+ }
+
+.buttons button {
+	background-color: #eee;
+	border: none;
+	border-radius: 7px;
+	color: #8d5a5a;
+	cursor: pointer;
+	flex: 1;
+	font-size: 20px;
+	margin: 5px;
+	padding: 19px;
+}
+
+.buttons button:hover {
+	background-color: #ddd;
+    transition: 0.2s;
+}
