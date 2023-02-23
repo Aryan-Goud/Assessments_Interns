@@ -1,0 +1,16 @@
+com\controller\PatientController.class
+com\services\VisitService.class
+com\model\Doctor.class
+com\model\Hospital.class
+com\model\Patient.class
+com\controller\HospitalController.class
+com\services\VisitServiceImpl.class
+com\model\Visit.class
+com\controller\VisitController.class
+com\services\DoctorService.class
+com\services\PatientServiceImpl.class
+com\services\HospitalServiceImpl.class
+com\services\PatientService.class
+com\controller\DoctorController.class
+com\services\DoctorServiceImpl.class
+com\services\HospitalService.class
