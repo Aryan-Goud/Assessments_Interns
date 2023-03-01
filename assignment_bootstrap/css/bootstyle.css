@@ -1,6 +1,6 @@
 .hea{
     padding-top: 1px;
-    padding-bottom: 420px;
+    padding-bottom: 397px;
     background-color: rgb(2, 2, 43) ;
 }
 .navi{
@@ -34,6 +34,7 @@
     float: right;
     margin-right: 232px;
     border-radius: 4px;
+    margin-top: 5px;
 }
 hr{
     height: 1px;
@@ -43,14 +44,13 @@ hr{
 .bran{
     width: 50%;
     float: left;
+    margin-top: -23px;
 }
 .branh1 , .branp {
     margin-left: 170px; 
     color: white;
 }
-.branp{
-    margin-right: 190px;
-}
+
 img{
     height: 420px;
     width: 400px;
@@ -63,6 +63,9 @@ img{
     background-color: rgb(2, 2, 43);
     color: rgb(30, 171, 171);
     border-color: rgb(30, 171, 171);
+}
+.thumbnail{
+    box-shadow:none;
 }
 h5{
     font-size: 15px;
@@ -207,3 +210,22 @@ align-items: right;
     justify-content:space-between ;
     align-items: center
 }
+.padbot{
+    padding-bottom: 10px;
+
+}
+#myBtn {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 110px;
+    z-index: 99;
+    font-size: 11px;
+    border: none;
+    outline: none;
+    background-color: rgb(73, 86, 139);
+    color: white;
+    cursor: pointer;
+    padding: 7px;
+    border-radius: 14px;
+  }
