@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <a href="#" class="anchor" data-details="Details about this anchor">Click me</a>
+<div class="details"></div>
+<script>const anchors = document.querySelectorAll('.anchor');
+
+    anchors.forEach(anchor => {
+      anchor.addEventListener('click', (event) => {
+        event.preventDefault();
+        const details = anchor.getAttribute('data-details');
+        const detailsContainer = anchor.nextElementSibling;
+        detailsContainer.textContent = details;
+        detailsContainer.classList.add('show');
+      });
+    });
+    </script>
+</body>
+</html>

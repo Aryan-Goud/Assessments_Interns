@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Data Table Example</title>
+    <style>
+      /* Navigation bar styles */
+      .navbar {
+        background-color: #333;
+        overflow: hidden;
+      }
+      .navbar a {
+        float: left;
+        color: #f2f2f2;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 17px;
+      }
+      .navbar a:hover {
+        background-color: #ddd;
+        color: black;
+      }
+      .active {
+        background-color: #4CAF50;
+        color: white;
+      }
+      .login-form {
+        float: right;
+        padding: 14px 16px;
+        color: #f2f2f2;
+      }
+      .search-form {
+        float: right;
+        padding: 14px 16px;
+        color: #f2f2f2;
+      }
+      /* Table styles */
+      .table-container {
+        width: 70%;
+        margin-top: 20px;
+        margin-left: 20px;
+      }
+      .data-table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+      .data-table td, .data-table th {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: center;
+        font-size: 14px;
+      }
+      .data-table th {
+        background-color: #4CAF50;
+        color: white;
+      }
+      .data-table tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+      .data-table tr:hover {
+        background-color: #ddd;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation bar -->
+    <div class="navbar">
+      <a class="active" href="#">Home</a>
+      <a href="#">About</a>
+      <a href="#">Contact</a>
+      <div class="search-form">
+        
+      </div>
+    </div>
+    <!-- Data table -->
+    <div class="table-container">
+      <form>
+        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names..">
+        
+      </form><br>
+      <table class="data-table" id="mytable">
+        <thead>
+          <tr>
+            <th>Serial Number</th>
+            <th>Device Name</th>
+            <th>Employee Name</th>
+            <th>Priority</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="table_body">
+          
+        </tbody>
+      </table>
+    </div>
+    <script>
+      
+      fetch("http://localhost:8080/Device_Management/users/display")
+      .then(response => response.json())
+      .then(objectData=>{
+        console.log(objectData);
+        let myTable="";
+        objectData.map((values)=>{
+          myTable+=`<tr>
+            <td>${values.s_no}</td>
+            <td>${values.systemid}</td>
+            <td>${values.name}</td>
+            <td>
+      <select name="priority" id="priority">
+        <option value="low">Low</option>
+        <option value="medium">Medium</option>
+        <option value="high">High</option>
+      </select></td>
+            <td><select name="status" id="status">
+        <option value="not">Not Done</option>
+        <option value="done">Done</option>
+      </select></td>    
+            </tr>`;
+        });
+        var table = document.getElementById("table_body");
+        table.innerHTML=myTable;
+      })
+      function myFunction() {
+  // Declare variables
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("mytable");
+  tr = table.getElementsByTagName("tr");
+
+  // Loop through all table rows, and hide those who don't match the search query
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[2];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+
+
+//       const api_url = 
+//       "http://localhost:8080/Device_Management/users/display";
+  
+// // Defining async function
+// async function getapi(url) {
+    
+//     // Storing response
+//     const response = await fetch(url);
+    
+//     // Storing data in form of JSON
+//     var data = await response.json();
+//     console.log(data);
+//     if (response) {
+//         hideloader();
+//     }
+//     show(data);
+// }
+// // Calling that async function
+// getapi(api_url);
+
+
+// var requestOptions = {
+//   method: 'GET',
+//   redirect: 'follow'
+// };
+
+// fetch("http://localhost:8080/Device_Management/users/display", requestOptions)
+//   .then(response => response.json)
+//   .then(result => {
+//     console.log(result)
+//   })
+//   .catch(error => console.log('error', error));
+  </script>
+
+</body>
+</html>
