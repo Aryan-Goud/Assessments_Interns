@@ -9,8 +9,7 @@ public class RequestItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "req_id")
     private int s_no;
-    @OneToMany
-    @JoinColumn(name="user_id")
+    @Column(name = "user_id")
     private int u_id;
     @Column(name = "req_name")
     private String reqname;

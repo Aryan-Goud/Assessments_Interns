@@ -28,6 +28,7 @@
             <list>
                 <value>com.model.User</value>
                 <value>com.model.RequestItem</value>
+                <value>com.model.Status</value>
             </list>
         </property>
         <property name="hibernateProperties" >

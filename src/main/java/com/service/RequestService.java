@@ -1,6 +1,7 @@
 package com.service;
 
 import com.model.RequestItem;
+import com.model.User;
 
 import java.util.List;
 
@@ -12,4 +13,6 @@ public interface RequestService  {
     RequestItem getReqId(int id);
     RequestItem updateReq(RequestItem name);
     RequestItem deleteReq(int id);
+    int search(int sysids);
+//    User creating(User user);
 }

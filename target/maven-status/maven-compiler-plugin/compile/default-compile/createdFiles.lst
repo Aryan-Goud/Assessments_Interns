@@ -1,8 +1,12 @@
 com\controller\RequestItemController.class
+com\service\StatusServiceImpl.class
 com\service\RequestService.class
 com\controller\UserController.class
+com\model\Status.class
 com\model\User.class
 com\service\UserServiceImpl.class
 com\model\RequestItem.class
+com\controller\StatusController.class
 com\service\RequestServiceImpl.class
+com\service\StatusService.class
 com\service\UserService.class

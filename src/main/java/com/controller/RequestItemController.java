@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-@CrossOrigin(origins = "http://127.0.0.1:5500")
+@CrossOrigin
 @RestController
 @RequestMapping("/request")
 public class RequestItemController {
@@ -18,7 +18,7 @@ public class RequestItemController {
     RequestService requestService;
     @Autowired
     UserService userService;
-    RequestItem requestItem=requestService.getReqId(userService.getUserId());
+//    RequestItem requestItem= requestService.getReqId(userService.getUserId());
     
     public static final Logger logger= LoggerFactory.getLogger(RequestItemController.class);
     @GetMapping("/display")
