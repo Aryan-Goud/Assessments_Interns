@@ -3,54 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Device Complaint</title>
-    <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #F2F2F2;
-    }
-
-    #form-container {
-      max-width: 600px;
-      margin: 0 auto;
-      background-color: #FFFFFF;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px #999;
-    }
-
-    h1 {
-      text-align: center;
-      color: #555555;
-    }
-
-    label {
-      display: block;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-
-    input[type="text"], textarea {
-      width: 97%;
-      padding: 10px;
-      border-radius: 5px;
-      border: 1px solid #CCC;
-      margin-bottom: 20px;
-      resize: none;
-    }
-
-    button[type="submit"] {
-      background-color: #0077CC;
-      color: #FFFFFF;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    button[type="submit"]:hover {
-      background-color: #7d79f1;
-    }
-  </style>
+<link rel="stylesheet" href="incidentCSS.css">
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
@@ -59,9 +12,42 @@
      
 </head>
 <body>
-<div id="form-container">
-    <h1>Device Complaint</h1>
-    <form action="raisetickets" id="ticketsraise" method="post">
+<!-- <div id="form-container"> -->
+  <h1>Device Complaint</h1>
+    <div class="container">
+      <form onsubmit="showPopup(event)" onsubmit="sendmail(); reset(); return false" action="raisetickets" id="ticketsraise" method="post">
+        <div class="form-column">
+          <div class="form-group">
+            <label for="systemid">System ID</label>
+            <input type="text" id="systemid" name="systemid" onblur="fetchSystemName(this.value)" required>
+          </div>
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+        </div>
+        <div class="form-column">
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone" required>
+          </div>
+          <div class="form-group">
+            <label for="os">Operating System</label>
+            <input type="text" id="os" name="os" required>
+          </div>
+          <div class="form-group full-width">
+            <label for="complaints">Complaint</label>
+            <textarea id="complaints" name="complaints" rows="4" required></textarea>
+          </div>
+        </div>
+        <input class="submit-btn" type="submit" id="sub"  value="Submit"></input>
+      </form>
+    </div>
+    <!-- <form style="margin-top: 8px;" onsubmit="showPopup(event)" action="raisetickets" id="ticketsraise" method="post">
       
       <label for="systemid">System ID:</label>
       <input type="text" id="systemid" name="systemid" onblur="fetchSystemName(this.value)" required>
@@ -69,7 +55,7 @@
         <input type="text"  id="name" name="name"  required>
 
         <label for="email">Email:</label>
-        <input type="text" id="email" name="email" required>
+        <input type="email" id="email" name="email" required>
 
         <label for="phone">Phone Number:</label>
         <input type="text" id="phone" name="phone" required>
@@ -81,136 +67,45 @@
         <label for="complaints">Complaints:</label>
         <textarea id="complaints" name="complaints" rows="5" required></textarea>
 
-        <button type="submit" id="sub" data-toggle="modal" data-target="#basicModal">Submit</button>
-    </form>
+        <input type="submit" id="sub"  value="Submit"></input>
+
+    </form> -->
+<!-- </div> -->
+
+<div class="popup-overlay"></div>
+
+<div class="popup">
+  <p>Complaint Raised successfully!</p>
+  <button onclick="hidePopup()">Close</button>
 </div>
-<div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="myModalLabel">Request Form</h4>
-      </div>
-      <div class="modal-body">
-          <h3>Sucessfully Ticket Raised</h3>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
+<!-- <div class="popup" id="popup-msg">
+  <img src="tick.png" alt="tick logo">
+  <h2 style="color: black;">Thank You!</h2>
+  <p>You have successfully Raised Complaint.</p>
+  <button type="button" onclick="closePopup()">OK</button>
+</div> -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-   
-<script>
-
-// let v= document.getElementById('systemid');
-//         function fetchSystemName(v){
-//   // let v= document.getElementById('systemid');
-//         // console.log(v)
-// fetch("http://localhost:8080/Device_Management/users/display")
-//       .then(response => response.json())
-//       .then(objectData=>{
-//         // console.log(objectData);
-//         // let myTable="";
-//         // console.log(v)
-//         // console.log(objectData[1])
-//         // let v= document.getElementById('systemid');
-//         // console.log(v)
-//         var flag=1;
-//         for (i = 0; i < objectData.length; i++){
-//               // var store=console.log(objectData[i])
-//               // console.log(store)
-//               var v1= objectData[i].systemid;
-//                 if (v==v1){
-//                   flag=0;
-//                   // document.getElementById('systemid')
-//               // console.log(document.getElementById('email').value = objectData[1].email)
-//               document.getElementById('email').value = objectData[i].email;
-//               document.getElementById('phone').value = objectData[i].phone;
-//                 document.getElementById('name').value = objectData[i].name;
-//                 document.getElementById('os').value = objectData[i].os;
-//                 break;
-                
-//               }
-//         }
-//         if (flag==1){
-//           document.getElementById('email').value = "";
-//               document.getElementById('phone').value = "";
-//                 document.getElementById('name').value = "";
-//                 document.getElementById('os').value = ""   ;  
-//                 document.getElementById('complaints').value = ""; 
-//               }
-      
-//       //   // objectData.map((values)=>{
-          
-//       });
-//       // });
-//         }
-
-  const myButton = document.getElementById("sub");
-
-
-  const form = document.getElementById('ticketsraise');
-  
-  form.addEventListener('submit', (e)=>{
-      e.preventDefault();
-
-      const formData = new FormData(form);
-    let formDataObject = Object.fromEntries(formData.entries());
-      let formDataJsonString = JSON.stringify(formDataObject);
-
-
-      fetch('http://localhost:8080/Device_Management/users/create', {
-          method:'POST',
-           //Set the headers that specify you're sending a JSON body request and accepting JSON response
-      headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-          body: formDataJsonString
-      }).then(res => res.json)
-        .then(data => console.log(data))
-        .catch((err) =>{
-          alert(err);
-          console.log(err)
-      });
-  });
-  //   var i=1;
-  
-//   // let v= document.getElementById('systemid').getAttribute('value',systemid);
-//     fetchSystemName(i)
-//     function fetchSystemName(i) {
-//     fetch("http://localhost:8080/Device_Management/users/"+i)
-//       .then(response => response.json()) 
-//       .then(objectData=>{
-//         console.log(objectData);
-//         // let v1=objectData.systemid;
-//         let v= document.getElementById('systemid').getAttribute(systemid);
-//         document.getElementById('email').value = objectData.email;
-//         // document.getElementById('email').value = v;
-//         //       document.getElementById('phone').value = v1;
-//         //     if(v ==v1 )
-//         //     {
-              
-              // document.getElementById('email').value = objectData.email;
-              // document.getElementById('phone').value = objectData.phone;
-              //   document.getElementById('name').value = objectData.name;
-              //   document.getElementById('os').value = objectData.os;
-
-//         //     }
-//         //     else
-//         //     {
-//         //         i=i+1;
-//         //         fetchSystemName(i)
-//         //     }
-//         });
-//     // });
-// }
-
-
-  
-</script>
+    <script src="incidentJS.js"></script>
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+    <script>
+      function sendmail(){
+          Email.send({
+          Host : "smtp.gmail.com",
+          Username : "aryan.gollapelly@wavemaker.com",
+          Password : "pramati123",
+          To : 'aryangoud9848@gmail.com',
+          From : document.getElementById("email").value,
+          Subject : "Ticket Raised Successfully",
+          Body : "Name: "+document.getElementById("name").value
+                  +"<br> Email: "+document.getElementById("email").value
+                  +"<br> System ID: "+document.getElementById("systemid").value
+                  +"<br> Phone number: "+document.getElementById("phone").value
+                  +"<br> Issue: "+document.getElementById("complaints").value
+      }).then(
+        message => alert("message sent successfully")
+      );
+      }
+    </script>
 </body>
 </html>

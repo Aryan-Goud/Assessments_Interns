@@ -1,0 +1,17 @@
+img{
+    height: 121px;
+    }
+    .imgs{
+    margin: 40px 40px;
+    }
+    button{
+        background-color: rgb(64, 64, 176);
+        border-radius: 5px;
+        border-color: white;
+        color:white;
+    }
+    button:hover{
+        color: #000;
+        transition: 0.3s;
+        background-color:rgb(87, 87, 176);
+    }

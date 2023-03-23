@@ -11,26 +11,11 @@
 <!-- Optional theme -->
  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"> 
  <link rel="stylesheet" href="ITtechcss.css">
-    <style>img{
-    height: 121px;
-    }
-    .imgs{
-    margin: 40px 40px;
-    }
-    button{
-        background-color: rgb(64, 64, 176);
-        border-radius: 5px;
-        border-color: white;
-        color:white;
-    }
-    button:hover{
-        color: #000;
-        transition: 0.3s;
-        background-color:rgb(87, 87, 176);
-    }
-</style>
+<link rel="stylesheet" href="ITtechCSS.css">
 </head>
-<body>
+<body style="background-color: #f2f2f2;">
+    <button style="padding: 10px 10px; margin-top: 20px; margin-left: 20px;"><a href="firstpage.html" style="color: #000; text-decoration: none;">Home</a></button>
+    <h2 style="text-align: center;">Request for a Product</h2>
 <div class="imgs">
     <div class="row">
         <div class="col-sm-4 col-md-4" style="margin-left: 50px;">
@@ -121,7 +106,7 @@
             </div>
             <div class="modal-body">
                 
-                <form action="request" id="requests" method="post">
+                <form action="request" onsubmit="showPopup(event)" id="requests" method="post">
                     <!-- <label for="name">userid:</label>
                 <input type="text" id="u_id" name="u_id" required> -->
                 <label for="name">Name:</label>
@@ -131,72 +116,25 @@
                 <input type="text" id="sysid" name="sysid" required><br>
                 <label for="email">Product:</label>
                 <input type="text" id="item" name="item" required>
-                
-              <button type="submit" id="sub" class="btn btn-primary">Submit</button>
+                <br>    <br>
+              
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              
+              <button type="submit" id="sub" onclick="myFunction()" class="btn btn-primary">Submit</button>
                 </form>
                 <br>
             </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
+            <!-- <div class="modal-footer">
+            </div> -->
           </div>
         </div>
       </div>
+      
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
    
-    <script>
-        function showYesNo(clicked) {
-        document.getElementById('item').setAttribute('value', clicked);
-                // var myvalue=clicked;
-            }   
-        // var myvalue = document.getElementById('');
-		// var myvalue = "dvd";
-        // document.getElementById('dvd').setAttribute('value', myvalue);
-		// var myvalue = "Speakers";
-        // document.getElementById('speaker').setAttribute('value', myvalue);
-		// // var myvalue = "Mouse";
-        // document.getElementById('mouse').setAttribute('value', myvalue);
-		// // var myvalue = "Mainboard";
-        // document.getElementById('mainboard').setAttribute('value', myvalue);
-		// // var myvalue = "Keypad";
-        // document.getElementById('keypad').setAttribute('value', myvalue);
-		// function showYesNo(this.id){
-		// 	var answer = "";
-		// 	if (confirm("Are you sure?")) {
-		// 		answer = "added";
-		// 	} else {
-		// 		answer = "Not added";
-		// 	}
-        // }
-        const myButton = document.getElementById("sub");
-
-
-  const form = document.getElementById('requests');
-  
-  form.addEventListener('submit', (e)=>{
-      e.preventDefault();
-
-      const formData = new FormData(form);
-    let formDataObject = Object.fromEntries(formData.entries());
-      let formDataJsonString = JSON.stringify(formDataObject);
-
-
-      fetch('http://localhost:8080/Device_Management/request/create', {
-          method:'POST',
-           //Set the headers that specify you're sending a JSON body request and accepting JSON response
-      headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-          body: formDataJsonString
-      }).then(res => res.json)
-        .then(data => console.log(data))
-        .catch((err) =>{
-          alert(err);
-          console.log(err)
-      });
-  });
+    <script src="ITtechJS.js">
+       
 	</script>
 </body>
 </html>

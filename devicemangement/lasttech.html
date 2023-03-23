@@ -3,180 +3,139 @@
   <head>
     <meta charset="UTF-8">
     <title>Data Table Example</title>
-    <style>
-      /* Navigation bar styles */
-      .navbar {
-        background-color: #333;
-        overflow: hidden;
-      }
-      .navbar a {
-        float: left;
-        color: #f2f2f2;
-        text-align: center;
-        padding: 14px 16px;
-        text-decoration: none;
-        font-size: 17px;
-      }
-      .navbar a:hover {
-        background-color: #ddd;
-        color: black;
-      }
-      .active {
-        background-color: #4CAF50;
-        color: white;
-      }
-      .login-form {
-        float: right;
-        padding: 14px 16px;
-        color: #f2f2f2;
-      }
-      .search-form {
-        float: right;
-        padding: 14px 16px;
-        color: #f2f2f2;
-      }
-      /* Table styles */
-      .table-container {
-        width: 70%;
-        margin-top: 20px;
-        margin-left: 20px;
-      }
-      .data-table {
-        border-collapse: collapse;
-        width: 100%;
-      }
-      .data-table td, .data-table th {
-        border: 1px solid #ddd;
-        padding: 8px;
-        text-align: center;
-        font-size: 14px;
-      }
-      .data-table th {
-        background-color: #4CAF50;
-        color: white;
-      }
-      .data-table tr:nth-child(even) {
-        background-color: #f2f2f2;
-      }
-      .data-table tr:hover {
-        background-color: #ddd;
-      }
-    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"> 
+     
+    <link rel="stylesheet" href="lasttechCSS.css">
   </head>
-  <body>
+  <body style="overflow-x: hidden;">
     <!-- Navigation bar -->
     <div class="navbar">
-      <a class="active" href="#">Home</a>
-      <a href="#">About</a>
-      <a href="#">Contact</a>
+      <a class="active" href="firstpage.html">Home</a>
+      <a href="#" data-target="#basicModal" data-toggle="modal">About</a>
+      <a href="#" data-target="#bm" data-toggle="modal">Contact</a>
       <div class="search-form">
         
       </div>
     </div>
     <!-- Data table -->
+    
+    <div class="row" style="margin-top: -20px;">
+      <div style="background-color:#E3B448; padding-bottom: 30px;" class="col-xs-12 col-md-8">
     <div class="table-container">
       <form>
         <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names..">
         
       </form><br>
-      <table class="data-table" id="mytable">
-        <thead>
-          <tr>
-            <th>Serial Number</th>
-            <th>Device Name</th>
-            <th>Employee Name</th>
-            <th>Priority</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody id="table_body">
-          
-        </tbody>
-      </table>
-    </div>
-    <script>
+          <table class="data-table" id="mytable">
+          <thead>
+            <tr>
+              <th>Serial Number</th>
+              <th>System ID</th>
+              <th>Employee Name</th>
+              
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="table_body">
+            
+          </tbody>
+        </table>
+      </div>
+      </div>
+        <div  style="background-color:#BDD99E; padding-bottom: 130px; padding-top: 100px;" class="col-xs-6 col-md-4">
+          <!-- <label for="name">userid:</label>
+      <input type="text" id="u_id" name="u_id" required> -->
       
-      fetch("http://localhost:8080/Device_Management/users/display")
-      .then(response => response.json())
-      .then(objectData=>{
-        console.log(objectData);
-        let myTable="";
-        objectData.map((values)=>{
-          myTable+=`<tr>
-            <td>${values.s_no}</td>
-            <td>${values.systemid}</td>
-            <td>${values.name}</td>
-            <td>
-      <select name="priority" id="priority">
-        <option value="low">Low</option>
-        <option value="medium">Medium</option>
-        <option value="high">High</option>
-      </select></td>
-            <td><select name="status" id="status">
-        <option value="not">Not Done</option>
-        <option value="done">Done</option>
-      </select></td>    
-            </tr>`;
-        });
-        var table = document.getElementById("table_body");
-        table.innerHTML=myTable;
-      })
-      function myFunction() {
-  // Declare variables
-  var input, filter, table, tr, td, i, txtValue;
-  input = document.getElementById("myInput");
-  filter = input.value.toUpperCase();
-  table = document.getElementById("mytable");
-  tr = table.getElementsByTagName("tr");
-
-  // Loop through all table rows, and hide those who don't match the search query
-  for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[2];
-    if (td) {
-      txtValue = td.textContent || td.innerText;
-      if (txtValue.toUpperCase().indexOf(filter) > -1) {
-        tr[i].style.display = "";
-      } else {
-        tr[i].style.display = "none";
-      }
-    }
-  }
-}
-
-
-//       const api_url = 
-//       "http://localhost:8080/Device_Management/users/display";
-  
-// // Defining async function
-// async function getapi(url) {
+        <label for="name">Name:</label>
+        <input type="text" id="name1" name="name1" placeholder="Name" readonly required>
     
-//     // Storing response
-//     const response = await fetch(url);
+        <label for="systemid">System ID:</label>
+        <input type="text" id="systemid1" name="systemid1" placeholder="System ID" required readonly>
     
-//     // Storing data in form of JSON
-//     var data = await response.json();
-//     console.log(data);
-//     if (response) {
-//         hideloader();
-//     }
-//     show(data);
-// }
-// // Calling that async function
-// getapi(api_url);
-
-
-// var requestOptions = {
-//   method: 'GET',
-//   redirect: 'follow'
-// };
-
-// fetch("http://localhost:8080/Device_Management/users/display", requestOptions)
-//   .then(response => response.json)
-//   .then(result => {
-//     console.log(result)
-//   })
-//   .catch(error => console.log('error', error));
+        <label for="Issue">Description:</label>
+        <textarea id="description1" name="description1" placeholder="Issue" rows="4" required readonly></textarea>
+    
+        <label for="request">Request:</label>
+        <textarea id="request1" name="request1" placeholder="Product request" rows="4" required readonly></textarea>
+    
+      </div>
+      
+      </div>
+      <div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <h4 class="modal-title" id="myModalLabel">About Us</h4>
+            </div>
+            <div class="modal-body">
+                <h3></h3>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade" id="bm" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <h4 class="modal-title" id="myModalLabel">Contact Us</h4>
+            </div>
+            <div class="modal-body">
+                <h3></h3>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade" id="bb" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <h4 class="modal-title" id="myModalLabel">Confirmation</h4>
+            </div>
+            <div class="modal-body">
+              <form action="status" id="status" method="post">
+                
+                <!-- <label for="uId">Confirm uid ID:</label>
+                <input  type="text" id="uId" name="uId" required> -->
+                <label for="sysId">Confirm System ID:</label>
+                <input  type="text" id="sysId" name="sysId" required>
+                <select name="priority1" id='priority1'>
+                  <option value="Low" >Low</option>
+                  <option value="Medium" >Medium</option>
+                  <option value="High" >High</option>
+                </select>
+                <label for="priority">Priority</label>
+                <input type="text" id="priority" name="priority" required>
+                <select name="status1" id="status1">
+                  <option value="Not Done">Not Done</option>
+                  <option value="Done">Done</option>
+                </select>
+                  <label for="progress">Status</label>
+                <input type="text" id="progress" name="progress" required>
+                
+              <button type="button" class="btn btn-default" data-dismiss="modal" style="margin-left: 400px;">Close</button>
+              <button type="submit" id="sub" class="btn btn-primary" onclick="submiting()" style="margin-left: 20px;">Submit</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+     
+    <script src="lasttechJS.js">
+      
   </script>
-
 </body>
 </html>
