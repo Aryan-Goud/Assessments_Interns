@@ -1,25 +1,311 @@
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.13/jspdf.plugin.autotable.min.js"></script>
+
+
+  
 </head>
 <body>
-    <a href="#" class="anchor" data-details="Details about this anchor">Click me</a>
-<div class="details"></div>
-<script>const anchors = document.querySelectorAll('.anchor');
+  <button onclick="down()">downlosdfad</button>
+  <p id="ids">hiii</p>
 
-    anchors.forEach(anchor => {
-      anchor.addEventListener('click', (event) => {
-        event.preventDefault();
-        const details = anchor.getAttribute('data-details');
-        const detailsContainer = anchor.nextElementSibling;
-        detailsContainer.textContent = details;
-        detailsContainer.classList.add('show');
+
+  <!-- <table style="background-color: #ffffff;" class="data-table" id="mytable">
+    <thead>
+      <tr>
+        <th>Serial Number</th>
+        <th>System ID</th>
+        <th>Employee Name</th>
+        
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody id="table_body">
+      
+    </tbody>
+  </table> -->
+
+  <script src="https://unpkg.com/jspdf-invoice-template@1.4.0/dist/index.js"></script>
+ 
+  <script>
+    
+    
+// function down(){
+//   var jsPDF = require('jspdf');
+// let c=-1
+// const a=[];
+// fetch("http://localhost:8080/Device_Management/status/display")
+//   .then(response => response.json())
+//   .then(data => {// const autoTable=require('jspdf-autotable');
+
+
+// // Create a new button element
+// const button = document.createElement("button");
+// button.textContent = "Download PDF";
+
+// // Add an event listener to the button
+// button.addEventListener("click", () => {
+//   // Filter objects with progress "Done"
+//   const filteredData = data.filter(item => item.progress === "Done");
+//   // const filteredDatas = data.filter(item => item.progress === "Done");
+//   // Create a new PDF document
+//   const doc = new jsPDF();
+
+//   // Set the document properties
+//   doc.setProperties({
+//     title: "Filtered Data",
+//     subject: "Data with progress 'Done'",
+//     author: "Your Name",
+//     keywords: "Filtered Data, Progress Done",
+//   });
+
+//   // Define the table headers
+//   const headers = [["statId", "uId", "priority", "progress", "sysId"]];
+//   var dataRows=[]
+//   // Map the data to an array of arrays
+
+
+
+// //   var a=[]
+// for (let index = 0; index < data.length; index++) {
+//   // const element = array[index];
+  
+  
+// // objectDatas.map((values) => {
+// fetch("http://localhost:8080/Device_Management/users/display")
+//   .then(response => response.json())
+//   .then(datass => {// const autoTable=require('jspdf-autotable');
+// // console.log(data)
+// // objectData.map((values) => {
+  
+//   // console.log(a)
+//   for (i = 0; i < (datass.length); i++){
+        
+        
+        
+//         // let u=row
+//         // console.log(vv,v1)
+//         if (data[index].sysId ==datass[i].systemid){
+//             // a.push(datass[i])
+//             console.log(datass[i].name)
+//   dataRows.push([data[index].statId, datass[i].name, data[index].priority, data[index].progress, data[index].sysId])
+//             console.log(dataRows)
+//             break;
+//         }
+//       }
+      
+//     })
+//     console.log(dataRows)
+//     }
+//     // console.log(dataRows)
+//     // console.log(a)
+//     // console.log(a.length)
+
+
+
+
+
+
+//   // Add the table to the document
+//   (doc).autoTable({
+//     head: headers,
+//     body: dataRows,
+//   });
+
+//   // Save the document as a PDF file
+//   doc.save("filtered-data.pdf");
+// });
+
+// // Append the button to the document
+// document.body.appendChild(button);
+//   })
+
+
+
+
+
+
+
+  fetch("http://localhost:8080/Device_Management/status/display")
+  .then(response => response.json())
+  .then(data => {
+    // Create a new button element
+    const button = document.createElement("button");
+    button.textContent = "Download PDF";
+
+    // Add an event listener to the button
+    button.addEventListener("click", () => {
+      // Filter objects with progress "Done"
+      const filteredData = data.filter(item => item.progress === "Done");
+
+      // Create a new PDF document
+      const doc = new jsPDF();
+let c=1;
+      // Set the document properties
+      doc.setProperties({
+        title: "Filtered Data",
+        subject: "Data with progress 'Done'",
+        author: "Your Name",
+        keywords: "Filtered Data, Progress Done",
       });
+
+      // Define the table headers
+      const headers = [["S_no","SystemID","name","Complaint","Status"]];
+      var dataRows=[]
+
+      // Fetch user data and format the table rows
+      fetch("http://localhost:8080/Device_Management/users/display")
+        .then(response => response.json())
+        .then(users => {
+          filteredData.forEach(item => {
+            const user = users.find(u => u.systemid === item.sysId);
+            if (user) {
+              dataRows.push([c++,item.sysId, user.name, user.complaints, item.progress]);
+            }
+          });
+
+          // Add the table to the document
+          doc.autoTable({
+            head: headers,
+            body: dataRows,
+          });
+
+          // Save the document as a PDF file
+          doc.save("Data_Done.pdf");
+        });
     });
-    </script>
+
+    // Append the button to the document
+    document.body.appendChild(button);
+  });
+
+
+
+
+
+  fetch("http://localhost:8080/Device_Management/status/display")
+  .then(response => response.json())
+  .then(data => {
+    // Create a new button element
+    const button = document.createElement("button");
+    button.textContent = "Download PDF";
+
+    // Add an event listener to the button
+    button.addEventListener("click", () => {
+      // Filter objects with progress "Done"
+      const filteredData = data.filter(item => item.progress === "Not Done");
+
+      // Create a new PDF document
+      const doc = new jsPDF();
+
+      // Set the document properties
+      doc.setProperties({
+        title: "Filtered Data",
+        subject: "Data with progress 'Not Done'",
+        author: "Your Name",
+        keywords: "Filtered Data, Progress Done",
+      });
+      let c=1
+      // Define the table headers
+      const headers = [["S_no", "System_ID","Name", "Complaint", "Status" ]];
+      var dataRows=[]
+
+      // Fetch user data and format the table rows
+      fetch("http://localhost:8080/Device_Management/users/display")
+        .then(response => response.json())
+        .then(users => {
+          filteredData.forEach(item => {
+            const user = users.find(u => u.systemid === item.sysId);
+            if (user) {
+              dataRows.push([c++,item.sysId, user.name, user.complaints, item.progress]);
+            }
+          });
+
+          // Add the table to the document
+          doc.autoTable({
+            head: headers,
+            body: dataRows,
+          });
+
+          // Save the document as a PDF file
+          doc.save("Data_Not_Done.pdf");
+        });
+    });
+
+    // Append the button to the document
+    document.body.appendChild(button);
+  });
+  
+
+
+
+
+  fetch("http://localhost:8080/Device_Management/status/display")
+  .then(response => response.json())
+  .then(statuses => {
+    // Fetch all user data
+    fetch("http://localhost:8080/Device_Management/users/display")
+      .then(response => response.json())
+      .then(users => {
+        // Find users that are not present in either "Done" or "Not Done"
+        const filteredUsers = users.filter(user =>
+          !statuses.some(status => status.sysId === user.systemid)
+        );
+
+        // Create a new button element
+        const button = document.createElement("button");
+        button.textContent = "Download PDF";
+
+        // Add an event listener to the button
+        button.addEventListener("click", () => {
+          // Create a new PDF document
+          const doc = new jsPDF();
+
+          // Set the document properties
+          doc.setProperties({
+            title: "Filtered Users",
+            subject: "Users not present in 'Done' or 'Not Done' status",
+            author: "Your Name",
+            keywords: "Filtered Users, Status",
+          });
+          const sub="hiii"
+          // Define the table headers
+          const headers = [["System ID","Name", "Email","Complaint"]];
+
+          // Format the table rows
+          const dataRows = filteredUsers.map(user => [user.systemid,user.name, user.email,user.complaints ]);
+
+          // Add the table to the document
+          doc.autoTable({
+            head: headers,
+            body: dataRows,
+          });
+
+          // Save the document as a PDF file
+          doc.save("Data_Not_Visited.pdf");
+        });
+
+        // Append the button to the document
+        document.body.appendChild(button);
+      });
+  });
+
+
+
+
+
+
+  </script>
+
 </body>
 </html>

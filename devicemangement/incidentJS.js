@@ -104,9 +104,36 @@ e.preventDefault();
 const formData = new FormData(form);
 let formDataObject = Object.fromEntries(formData.entries());
 let formDataJsonString = JSON.stringify(formDataObject);
+// console.log(formDataObject.email)
+
+console.log(formDataObject.email);
+Email.send({
+// console.log(formDataObject.email);
+Host : "smtp.elasticemail.com",
+Username : "aryan.gollapelly@wavemaker.com",
+Password : "2D4B24DF4805DC5340CA4749B6BEA5B1B7C1",
+To :`${formDataObject.email}`,
+// console.log(formDataObject.email);
+From : 'aryan.gollapelly@wavemaker.com',
+Subject : "Ticket Raised Successfully",
+Body : "Name: "+document.getElementById("name").value
+        +"<br> Email: "+document.getElementById("email").value
+        +"<br> System ID: "+document.getElementById("systemid").value
+        +"<br> Phone number: "+document.getElementById("phone").value
+        +"<br> Issue: "+document.getElementById("complaints").value
+}).then(
+
+);
+// }else{
+// alert("Please check the mail is correct or not")
+// }
+
+
+
 
 console.log(formDataObject);
 fetch('http://localhost:8080/Device_Management/users/create', {
+  // sendmail();
   method:'POST',
    //Set the headers that specify you're sending a JSON body request and accepting JSON response
 headers: {
@@ -114,7 +141,7 @@ headers: {
   Accept: "application/json",
 },
   body: formDataJsonString
-}).then(res => res.json)
+}).then(res =>res.json)
 .then(data => console.log(data))
 .catch((err) =>{
   alert(err);

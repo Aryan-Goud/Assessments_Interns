@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Chart.js Example</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+</head>
+<body>
+    <canvas id="myChart"></canvas>
+    <script>
+        const data = [{"s_no":1,"name":"aryan","email":"aryan@gmail.com","phone":"9898989898","systemid":123,"os":"mac","complaints":"mac not responding"},{"s_no":2,"name":"naveen","email":"naveen@gmail.com","phone":"989898850","systemid":134,"os":"mac","complaints":"mac not working"},{"s_no":3,"name":"hari","email":"hari@gmail.com","phone":"890898850","systemid":231,"os":"win","complaints":"windows not working"},{"s_no":14,"name":"anu","email":"anu@gmail.com","phone":"9809980987","systemid":767,"os":"win","complaints":"window not working"},{"s_no":15,"name":"yuvi","email":"yuvi@gmail.com","phone":"7687095490","systemid":777,"os":"win","complaints":"windows not working"},{"s_no":16,"name":"teena","email":"teena@gmail.com","phone":"9809987678","systemid":676,"os":"win","complaints":"windows not working"},{"s_no":17,"name":"gfh","email":"aad@gmail.com","phone":"9898989800","systemid":545,"os":"gfgf","complaints":"fggb"},{"s_no":18,"name":"navi","email":"navi@gmail.com","phone":"9999998880","systemid":1234,"os":"win","complaints":"windows not working"}];
+
+        // Count the occurrences of each systemid
+        const count = {};
+        for (let i = 0; i < data.length; i++) {
+            const systemid = data[i].systemid;
+            count[systemid] = (count[systemid] || 0) + 1;
+        }
+
+        // Create arrays of labels and data
+        const labels = Object.keys(count);
+        const dataArr = Object.values(count);
+
+        // Create a chart using Chart.js
+        const ctx = document.getElementById('myChart').getContext('2d');
+        const myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'System ID Counts',
+                    data: dataArr,
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    </script>
+</body>
+</html>

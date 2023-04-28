@@ -6,6 +6,7 @@ body {
     justify-content: center;
     height: 100vh;
     margin: 0;
+    font-family: sans-serif;
 }
 
 h1 {
@@ -17,7 +18,7 @@ h1 {
 }
 
 input {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     background-color: #2ecc71;
     color: white;
     border: none;
@@ -50,8 +51,8 @@ input:hover {
 .device {
     background-color: white;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-    width: 150px;
-    height: 150px;
+    width: 211px;
+    height: 204px;
     border-radius: 10px;
     margin: 0 1rem;
     display: flex;

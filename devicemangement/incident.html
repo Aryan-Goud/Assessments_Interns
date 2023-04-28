@@ -10,11 +10,14 @@
     <!-- Optional theme -->
      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"> 
      
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
 </head>
 <body>
 <!-- <div id="form-container"> -->
   <h1>Device Complaint</h1>
     <div class="container">
+      
+    <img style="width: 400px; height: 397px;" src="images/incidentimage.png" alt="Your Image">
       <form onsubmit="showPopup(event)" onsubmit="sendmail(); reset(); return false" action="raisetickets" id="ticketsraise" method="post">
         <div class="form-column">
           <div class="form-group">
@@ -30,7 +33,7 @@
             <input type="email" id="email" name="email" required>
           </div>
         </div>
-        <div class="form-column">
+        <div class="form-column" style="margin-top: 39px;">
           <div class="form-group">
             <label for="phone">Phone Number</label>
             <input type="tel" id="phone" name="phone" required>
@@ -46,6 +49,7 @@
         </div>
         <input class="submit-btn" type="submit" id="sub"  value="Submit"></input>
       </form>
+    
     </div>
     <!-- <form style="margin-top: 8px;" onsubmit="showPopup(event)" action="raisetickets" id="ticketsraise" method="post">
       
@@ -75,7 +79,8 @@
 <div class="popup-overlay"></div>
 
 <div class="popup">
-  <p>Complaint Raised successfully!</p>
+  <p>Complaint Raised successfully!</p><br>
+  <p>Mail sent</p>
   <button onclick="hidePopup()">Close</button>
 </div>
 <!-- <div class="popup" id="popup-msg">
@@ -87,25 +92,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script src="incidentJS.js"></script>
-    <script src="https://smtpjs.com/v3/smtp.js"></script>
-    <script>
-      function sendmail(){
-          Email.send({
-          Host : "smtp.gmail.com",
-          Username : "aryan.gollapelly@wavemaker.com",
-          Password : "pramati123",
-          To : 'aryangoud9848@gmail.com',
-          From : document.getElementById("email").value,
-          Subject : "Ticket Raised Successfully",
-          Body : "Name: "+document.getElementById("name").value
-                  +"<br> Email: "+document.getElementById("email").value
-                  +"<br> System ID: "+document.getElementById("systemid").value
-                  +"<br> Phone number: "+document.getElementById("phone").value
-                  +"<br> Issue: "+document.getElementById("complaints").value
-      }).then(
-        message => alert("message sent successfully")
-      );
-      }
-    </script>
+    <!-- <script src="ITtechJS.js"></script> -->
+    
 </body>
 </html>

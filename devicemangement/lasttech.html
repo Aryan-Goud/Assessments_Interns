@@ -9,13 +9,16 @@
      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"> 
      
     <link rel="stylesheet" href="lasttechCSS.css">
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
   </head>
   <body style="overflow-x: hidden;">
     <!-- Navigation bar -->
     <div class="navbar">
       <a class="active" href="firstpage.html">Home</a>
-      <a href="#" data-target="#basicModal" data-toggle="modal">About</a>
-      <a href="#" data-target="#bm" data-toggle="modal">Contact</a>
+      <a class="active" href="imgupload.html">Add Product</a>
+      
+      <a class="active" href="show-image.html">Metrics</a>
+      <a href="#" class="active" data-target="#bm" data-toggle="modal" onclick="emailing()">Email</a>
       <div class="search-form">
         
       </div>
@@ -23,13 +26,13 @@
     <!-- Data table -->
     
     <div class="row" style="margin-top: -20px;">
-      <div style="background-color:#E3B448; padding-bottom: 30px;" class="col-xs-12 col-md-8">
+      <div  height: auto; padding-bottom: 30px;" class="col-xs-12 col-md-8">
     <div class="table-container">
       <form>
         <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names..">
         
       </form><br>
-          <table class="data-table" id="mytable">
+          <table style="background-color: #ffffff;" class="data-table" id="mytable">
           <thead>
             <tr>
               <th>Serial Number</th>
@@ -45,20 +48,20 @@
         </table>
       </div>
       </div>
-        <div  style="background-color:#BDD99E; padding-bottom: 130px; padding-top: 100px;" class="col-xs-6 col-md-4">
+        <div  style=" padding: auto; padding-top: 100px;" class="col-xs-6 col-md-4">
           <!-- <label for="name">userid:</label>
       <input type="text" id="u_id" name="u_id" required> -->
       
-        <label for="name">Name:</label>
+        <label style="color: black;" for="name">Name:</label>
         <input type="text" id="name1" name="name1" placeholder="Name" readonly required>
     
-        <label for="systemid">System ID:</label>
-        <input type="text" id="systemid1" name="systemid1" placeholder="System ID" required readonly>
+        <label style="color: black;" for="systemid">System ID:</label>
+        <input  type="text" id="systemid1" name="systemid1" placeholder="System ID" required readonly>
     
-        <label for="Issue">Description:</label>
+        <label style="color: black;" for="Issue">Issue:</label>
         <textarea id="description1" name="description1" placeholder="Issue" rows="4" required readonly></textarea>
     
-        <label for="request">Request:</label>
+        <label style="color: black;" for="request">Request:</label>
         <textarea id="request1" name="request1" placeholder="Product request" rows="4" required readonly></textarea>
     
       </div>
@@ -85,13 +88,32 @@
           <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-              <h4 class="modal-title" id="myModalLabel">Contact Us</h4>
+              <h4 class="modal-title" id="myModalLabel">Send Mail</h4>
             </div>
             <div class="modal-body">
-                <h3></h3>
+              <form action="view" method="post" id="mailing">
+                <select name="myopt" id="myopt">
+
+                </select>
+                <label style="color: black;" for="systemsid1">System ID:</label>
+                <input  type="text" id="systemsid1" name="systemsid1" placeholder="System ID" required readonly>
+
+                <label style="color: black;" for="nam">Name:</label>
+                <input  type="text" id="nam" name="nam" placeholder="Name" required readonly>
+
+                <label style="color: black;" for="email1">Email:</label>
+                <input  type="text" id="email1" name="email1" placeholder="Email" required readonly>
+
+                <label style="color: black;" for="body1">Body:</label>
+                <textarea id="body1" name="body1" placeholder="Write Here" rows="4"  required></textarea>
+
+                
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="submit" id="su" class="btn btn-primary"  style="margin-left: 20px;">Send</button>
+            </form>
+    
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
           </div>
         </div>
@@ -110,18 +132,20 @@
                 <input  type="text" id="uId" name="uId" required> -->
                 <label for="sysId">Confirm System ID:</label>
                 <input  type="text" id="sysId" name="sysId" required>
-                <select name="priority1" id='priority1'>
+                
+                <label for="priority">Priority</label>
+                <select style="margin-bottom: 5px;" name="priority1" id='priority1'>
                   <option value="Low" >Low</option>
                   <option value="Medium" >Medium</option>
                   <option value="High" >High</option>
                 </select>
-                <label for="priority">Priority</label>
                 <input type="text" id="priority" name="priority" required>
-                <select name="status1" id="status1">
-                  <option value="Not Done">Not Done</option>
-                  <option value="Done">Done</option>
-                </select>
+                
                   <label for="progress">Status</label>
+                  <select style="margin-bottom: 5px;" name="status1" id="status1">
+                    <option value="Not Done">Not Done</option>
+                    <option value="Done">Done</option>
+                  </select>
                 <input type="text" id="progress" name="progress" required>
                 
               <button type="button" class="btn btn-default" data-dismiss="modal" style="margin-left: 400px;">Close</button>

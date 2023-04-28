@@ -14,11 +14,142 @@ fetch("http://localhost:8080/Device_Management/users/display")
       
       <button id="GFG_Button${count}" onclick="changepriority(this)"  data-target="#bb" data-toggle="modal"><span style='font-size:15px;'>&#10004;</span></button></td>    
        </td>     </tr>`;
+      //  clickedonrow(el)
     });
 
     var table = document.getElementById("table_body");
     table.innerHTML = myTable;
   })
+
+
+function emailing(){
+  fetch("http://localhost:8080/Device_Management/users/display")
+  .then(response => response.json())
+  .then(objectData => {
+    console.log(objectData);
+    let myopt = "";
+    let arrays=[]
+    // let count=0;
+    objectData.map((values) => {
+      // count += 1;
+      
+      console.log(arrays)
+      if (arrays.includes(values.systemid)){
+
+      }
+      else{
+      myopt += `<option id=${values.systemid}>${values.systemid}</option>`;
+      //  clickedonrow(el)
+      arrays.push(values.systemid);
+    }
+    });
+    
+    var sele = document.getElementById("myopt");
+    sele.innerHTML = myopt;
+
+
+
+  })
+}
+
+
+
+
+
+document.getElementById("myopt").addEventListener('change', (e)=>{
+  let selected = e.target;
+  let selectedval =  selected.value
+  console.log(selectedval)
+  document.getElementById('systemsid1').value = selectedval
+  console.log(document.getElementById('systemsid1').value)
+
+  fetch("http://localhost:8080/Device_Management/users/display")
+  .then(response => response.json())
+  .then(objectData => {
+    console.log(objectData);
+    // let myopt = "";
+    // let arrays=[]
+    // let count=0;
+    objectData.map((values) => {
+      // count += 1;
+      
+      // console.log(arrays)
+      if (selectedval==values.systemid){
+        document.getElementById('email1').value = values.email;
+        console.log(values.name)
+        var vv=document.getElementById('nam').value = values.name;
+        console.log(`${document.getElementById('email1').value}`)
+      
+      }
+    //   else{
+    //   myopt += `<option id=${values.systemid}>${values.systemid}</option>`;
+    //   //  clickedonrow(el)
+    //   arrays.push(values.systemid);
+    // }
+    });
+  })
+
+
+})
+
+
+const myButtons = document.getElementById("su");
+
+
+const forms = document.getElementById('mailing');
+
+forms.addEventListener('submit', (e)=>{
+e.preventDefault();
+
+const formDatass = new FormData(forms);
+let formDataObjectss = Object.fromEntries(formDatass.entries());
+let formDataJsonString = JSON.stringify(formDataObjectss);
+// console.log(formDataObject.email)
+
+console.log(formDataObjectss.email1);
+
+
+  Email.send({
+    Host : "smtp.elasticemail.com",
+    Username : "aryan.gollapelly@wavemaker.com",
+    Password : "2D4B24DF4805DC5340CA4749B6BEA5B1B7C1",
+    To :`${formDataObjectss.email1}`,
+    // console.log(formDataObject.email);
+    From : 'aryan.gollapelly@wavemaker.com',
+    Subject : "Greetings from Technician!!",
+    Body :document.getElementById("body1").value
+    }).then(
+    message => alert("message sent successfully")
+    
+    );
+
+    console.log(document.getElementById('email1').value);    
+
+}
+
+)
+// function fetchSys
+
+// var bt = document.getElementById('su');
+// var j1=document.getElementById('email1').value;
+//         // console.log(values.name)
+// var j2=document.getElementById('nam').value;
+// var j3=document.getElementById('systemsid1').value;
+// console
+// if (j1.length==0 || j2.length==0 || j3.length==0){
+//   bt.disabled=true;
+            
+            
+//             bt.style.cursor='no-drop'
+            
+// }
+// else{
+//   bt.disabled=true;
+//   bt.style.cursor='pointer'
+// }
+
+
+
 //   $('#priority1').change(function(event){
 //     var selectedcategory = $(this).children("option:selected").val();
 //     sessionStorage.setItem("itemName",selectedcategory);
@@ -40,41 +171,55 @@ function clickedonrow(el){
   let pselect = oCells[1].innerHTML
   let s="ai"+row
   let ps=document.getElementById(s).textContent
-  console.log(ps)
+  console.log(ps+"hi")
   fetch("http://localhost:8080/Device_Management/status/display")
 .then(response => response.json())
 .then(objectData=>{
 
       var vv="DONE"
-      console.log(objectData[row-1])
+      // console.log(objectData[row-1])
       for (i = 0; i < (objectData.length); i++){
-        var v1= objectData[i].progress;
-        var v1=v1.toUpperCase()
+        
+        
+        
         let u=row
-        console.log(vv,v1)
-        if (v1==vv){
+        // console.log(vv,v1)
+        if (objectData[i].sysId == ps){
+
           // flag=0;
-          
+          var v1= objectData[i].progress;
+          var v1=v1.toUpperCase()
+          // console.log(v1+"this is data")
+          if(v1==vv)
+          {
+            // console.log(v1+"hii");
+            // console.log(vv+"h");
+            // localStorage.
+            // document.getElementById('GFG_Button'+u).style.backgroundColor ='green';
+            break
+
+          }
+          else{
+            // console.log(v1)
+            // document.getElementById('GFG_Button'+u).style.backgroundColor ='red';
+            break
+          }
           // document.getElementById('systemid')
       // console.log(document.getElementById('email').value = objectData[1].email)
-      console.log(v1+"hii");
       
-      document.getElementById('GFG_Button'+u).style.backgroundColor ='green';
-        
       }
       else{
-        console.log(v1)
-  document.getElementById('GFG_Button'+u).style.backgroundColor ='red';
-
+        document.getElementById('GFG_Button'+u).style.backgroundColor ='white'
     }
   }
   });
-  shows(ps)
+  shows(ps,row)
 }
+let row;
 function changepriority(el) {
   var uTable = document.getElementById('mytable');
   console.log(uTable)
-  let row = el.parentNode.parentNode.rowIndex;
+  row = el.parentNode.parentNode.rowIndex;
   console.log(row);
 
   var oCells = uTable.rows.item(row).cells;
@@ -92,43 +237,9 @@ function changepriority(el) {
   // console.log(desc);
   document.getElementById('sysId').value=ps
   document.getElementById('sysId').readOnly = true;
-  fetchdetails(ps)
+  console.log(row+"ur row");
+  fetchdetails(ps,row)
 }
-
-// Store the selected option in localStorage when the user changes it
-// console.log(document.getElementById('priority1'))
-// document.getElementById('priority1').addEventListener('change', function () {
-//   localStorage.setItem('selectedOption', this.value);
-//   console.log(localStorage.getItem('selectedOption'))
-// });
-
-
-
-// if (localStorage.getItem('selectedOption')) {
-//   // Set the selected option to the value stored in localStorage
-//   document.getElementById('status1').value = localStorage.getItem('selectedOption');
-// }
-
-// Store the selected option in localStorage when the user changes it
-// document.getElementById('status1').addEventListener('change', function () {
-//   localStorage.setItem('selectedOption', this.value);
-// });
-//       $('select').change(function(){
-//     alert($(this).data('id'));
-// });
-// var up = document.getElementById("GFG_UP");
-
-// function getText() {
-//   select = document.querySelector('#priority1');
-//   output = select.value;
-//   select2 = document.querySelector('#status1');
-//   output2 = select2.value;
-//   document.getElementById('priority').value = output;
-//   document.getElementById('priority').readOnly = true;
-//   document.getElementById('progress').value = output2;
-//   document.getElementById('progress').readOnly = true;
-
-// }
 
 document.getElementById("priority1").addEventListener('change', (e)=>{
   let selected = e.target;
@@ -172,7 +283,7 @@ function myFunction() {
     }
   }
 }
-function fetchdetails(ps){
+function fetchdetails(ps,roww){
   var v=ps
 // let v= document.getElementById('systemid');
 console.log(v+"hii")
@@ -184,9 +295,10 @@ for (i = 0; i < objectData.length; i++){
       // var store=console.log(objectData[i])
       // console.log(store)
       var v1= objectData[i].sysId;
+      var b1=objectData[i].uId
       console.log(v1+"hello")
-        if (v1==v){
-          
+        if (v1==v && (roww+49)==b1){
+          console.log(b1,"sno",roww)
           flag=0;
           // document.getElementById('systemid')
       // console.log(document.getElementById('email').value = objectData[1].email)
@@ -210,11 +322,19 @@ if (flag==1){
 });
 // });
 }
+// let ro;
+// function clickedonrow(el){
+//   var uTable = document.getElementById('mytable');
+//   console.log(uTable)
+//   let ro = el.rowIndex;
+//   console.log(ro,"this is not");
+// }
+
 const myButton = document.getElementById("sub");
 
 
 const form = document.getElementById('status');
-
+var flag=1;
 form.addEventListener('submit', (e) => {
   e.preventDefault();
 
@@ -228,11 +348,43 @@ form.addEventListener('submit', (e) => {
   fetch("http://localhost:8080/Device_Management/status/display")
 .then(response => response.json())
 .then(objectData=>{
-var flag=1;
+
+  
+  
+//   fetch("http://localhost:8080/Device_Management/users/display")
+//   .then(response => response.json())
+//   .then(objectDatass=>{
+
+
+
+
+
+
+// for (i = 0; i < objectDatass.length; i++){
+//   var v6= objectDatass[i].systemid;
+//   var b1=objectDatass[i].s_no;
+//   console.log(formDataObject.sysId,"how is this",v6)
+//   console.log(row,b1,"sdahksdfkhl")
+//   if (v6==formDataObject.sysId && row==b1)
+//         {
+//          b1=objectDatass[i].s_no;
+//           uId=b1;
+//           console.log(formDataObject,"from")
+//           console.log(uId)
+//         }
+// }
+// console.log(b1)
+//   });
+
+
+
+  
+console.log(b1,"userid");
 for (i = 0; i < objectData.length; i++){
       // var store=console.log(objectData[i])
       // console.log(store)
       var v1= objectData[i].sysId;
+      var b1=objectData[i].uId;
       console.log(v1+"hello")
         if (v1==formDataObject.sysId)
         {
@@ -257,7 +409,7 @@ for (i = 0; i < objectData.length; i++){
                 
 
         }
-        colorchange();
+        // clickedonrow(el);
 }
 if (flag==1){
   fetch('http://localhost:8080/Device_Management/status/create', {
@@ -274,12 +426,18 @@ if (flag==1){
       alert(err);
       console.log(err)
     });
-    colorchange();
+    // clickedonrow(el);
 }
 })
 });
 
 function submiting(){
+  
+  // document.getElementById('progress').value = " ";
+  
+  // document.getElementById('priority').value = " ";
+  // document.getElementById('sysID').value = " ";
+  // document.getElementById('name').value = " ";
 
 }
 
@@ -321,7 +479,8 @@ function disi() {
 
   // document.getElementById('priority1').value = ;
 }
-function shows(ob) {
+function shows(ob,roww) {
+  
   fetch("http://localhost:8080/Device_Management/users/display")
     .then(response => response.json())
     .then(objectData => {
@@ -334,7 +493,8 @@ function shows(ob) {
         // var store=console.log(objectData[i])
         // console.log(store)
         var v1 = objectData[i].systemid;
-        if (v == v1) {
+        var b1=objectData[i].s_no;
+        if (v == v1 && (roww+49)==b1) {
           // flag=0;
           // document.getElementById('systemid')
           // console.log(document.getElementById('email').value = objectData[1].email)
@@ -370,6 +530,7 @@ function shows(ob) {
           // console.log(document.getElementById('email').value = objectData[1].email)
           var myreqs = objectData[i].item + ', ' + myreqs;
           var vm = myreqs.replace(', undefined', '');
+          // var vm = myreqs.replace(', undefined', '');
           document.getElementById('request1').value = vm;
           document.getElementById('request1').readOnly = true;
 

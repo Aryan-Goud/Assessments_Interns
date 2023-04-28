@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Upload Product Image</title>
+    <link rel="stylesheet" href="imgupload.css">
+  </head>
+  <body style="margin: 0px;">
+    <div class="navbar">
+      <a class="active" href="firstpage.html">Home</a>
+      <a class="active" href="lasttech.html">Back</a>
+      <!-- <a href="#" class="active" data-target="#bm" data-toggle="modal">Contact</a> -->
+      <div class="search-form">
+        
+      </div>
+    </div>
+    <h1>Upload Product Image</h1>
+    
+    <div class="form-container">
+    <img src="images/compo.png" alt="">
+    <form id="upload-form">
+      <div class="form-group">
+      <label for="image">Image:</label>
+      <input type="file" id="image" name="image" accept="image/*">
+    </div>
+      <br>
+      <div class="form-group">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name"><br>
+    </div>
+      <button type="submit" value="Submit">Submit</button>
+    </form></div>
+    <script>
+      const form = document.getElementById('upload-form');
+      form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const image = document.getElementById('image').files[0];
+        const name = document.getElementById('name').value;
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          const dataUrl = event.target.result;
+          const item = { image: dataUrl, name: name };
+          const items = JSON.parse(localStorage.getItem('items')) || [];
+          items.push(item);
+          localStorage.setItem('items', JSON.stringify(items));
+          window.location.href = 'ITtech.html';
+        }
+        reader.readAsDataURL(image);
+      });
+    </script>
+  </body>
+</html>
